@@ -155,7 +155,7 @@ export async function getServerSideProps() {
         const db = client.db("facebook");
 
         const movies = await db
-            .collection("userdata")
+            .collection("notes")
             .find({})
             .sort({ _id: -1 })
             .toArray();

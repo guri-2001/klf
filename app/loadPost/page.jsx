@@ -44,13 +44,13 @@
 //       console.log(res);
 
 //       res = await res.json();
-//       toast({
-//         title: 'Added Successfully',
-//         status: 'success',
-//         duration: 9000,
-//         isClosable: true,
-//         position: 'top',
-//       })
+      // toast({
+      //   title: 'Added Successfully',
+      //   status: 'success',
+      //   duration: 9000,
+      //   isClosable: true,
+      //   position: 'top',
+      // })
 
 //       setName("");
 //       setLoadInfo("");
@@ -165,12 +165,12 @@
 
 import axios from 'axios'
 import React, { useState } from 'react'
-// import { useToast } from '@chakra-ui/react';
-// import { useRouter } from 'next/navigation';
 import Link from 'next/link'
-import { Input, Textarea } from '@chakra-ui/react'
+import { Input, Textarea, useToast } from '@chakra-ui/react'
 
 const LoadPost = () => {
+
+  const toast = useToast()
 
   const [name, setName] = useState('')
   const [fromCity, setFromCity] = useState('')
@@ -192,15 +192,24 @@ const LoadPost = () => {
     console.log(newObj);
     const res = axios.post('/api/newNote', newObj)
       .then(() => {
-        alert('New note Added successfully')
+        // alert('New note Added successfully')
+      
       })
+
+      toast({
+        title: 'Added Successfully',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+        position: 'top',
+      })
+
 
     setName("")
     setFromCity("")
     setToCity("")
     setDate("")
     setLoadInfo("")
-    alert('Added successfully')
 
   }
 
