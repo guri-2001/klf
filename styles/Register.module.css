@@ -1,0 +1,25 @@
+.main{
+    background-image: url('/image.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: hidden;
+}
+.signup_box{
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 80%;
+}
+.logo{
+    display: block;
+    margin: 0 auto 20px;
+    max-width: 150px;
+}

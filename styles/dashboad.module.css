@@ -1,0 +1,16 @@
+.main {
+    font-family: Arial, sans-serif;
+}
+
+.content {
+    padding: 20px;
+    transition: all 0.3s;
+}
+
+.truck_card {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
