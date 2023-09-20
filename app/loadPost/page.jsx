@@ -168,6 +168,7 @@ import React, { useState } from 'react'
 // import { useToast } from '@chakra-ui/react';
 // import { useRouter } from 'next/navigation';
 import Link from 'next/link'
+import { Input, Textarea } from '@chakra-ui/react'
 
 const LoadPost = () => {
 
@@ -208,26 +209,31 @@ const LoadPost = () => {
       {/* <Link href={"loadPost"} className="bg-cyan-400 px-3 py-2 ml-5">Add Load</Link> */}
       <Link href={"allloads"} className="bg-cyan-400 px-3 py-2 ml-5">All loads</Link>
       <div className='flex w-1/2 m-auto p-5 justify-between   mt-5'>
-        <form className='w-full flex flex-col  gap-5 bg-slate-100 py-3 px-4 rounded-xl' onSubmit={handleSubmit}>
+        <form className='w-full flex flex-col  gap-4  py-3 px-4 rounded-xl' onSubmit={handleSubmit}>
           <div>
             <label className='text-2xl'>Name</label>
-            <input type="text" onChange={e => setName(e.target.value)} value={name} placeholder='Name' className='w-full p-2 border border-black  focus:shadow-lg outline-0' style={{ borderRadius: "5px" }} />
+            <Input placeholder='Name' size='lg' onChange={e => setName(e.target.value)} value={name} />
+            {/* <input type="text" onChange={e => setName(e.target.value)} value={name} placeholder='Name' className='w-full p-2 border border-black  focus:shadow-lg outline-0' style={{ borderRadius: "5px" }} /> */}
           </div>
           <div>
             <label className='text-2xl'>fromCity</label>
-            <input type="text" onChange={e => setFromCity(e.target.value)} value={fromCity} placeholder='FromCity' className='w-full p-2 border border-black  focus:shadow-lg outline-0' style={{ borderRadius: "5px" }} />
+          <Input placeholder='From City' size='lg' onChange={e => setFromCity(e.target.value)} value={fromCity} />
+            {/* <input type="text" onChange={e => setFromCity(e.target.value)} value={fromCity} placeholder='FromCity' className='w-full p-2 border border-black  focus:shadow-lg outline-0' style={{ borderRadius: "5px" }} /> */}
           </div>
           <div>
             <label className='text-2xl'>toCity</label>
-            <input type="text" onChange={e => setToCity(e.target.value)} value={toCity} placeholder='ToCity' className='w-full p-2 border border-black  focus:shadow-lg outline-0' style={{ borderRadius: "5px" }} />
+            <Input placeholder='To City' size='lg' onChange={e => setToCity(e.target.value)} value={toCity}/>
+            {/* <input type="text" onChange={e => setToCity(e.target.value)} value={toCity} placeholder='ToCity' className='w-full p-2 border border-black  focus:shadow-lg outline-0' style={{ borderRadius: "5px" }} /> */}
           </div>
           <div>
             <label className='text-2xl'>Date</label>
-            <input type="date" onChange={e => setDate(e.target.value)} value={date} className='w-full p-2 border border-black  focus:shadow-lg outline-0' style={{ borderRadius: "5px" }} />
+            <Input type='date' size='lg' onChange={e => setDate(e.target.value)} value={date} />
+            {/* <input type="date" onChange={e => setDate(e.target.value)} value={date} className='w-full p-2 border border-black  focus:shadow-lg outline-0' style={{ borderRadius: "5px" }} /> */}
           </div>
           <div>
             <label className='text-2xl'>LoadInfo</label>
-            <textarea type="text" onChange={e => setLoadInfo(e.target.value)} value={loadInfo} placeholder='About Load...' className='w-full p-2 border border-black  focus:shadow-lg outline-0' style={{ borderRadius: "5px" }}  ></textarea>
+            <Textarea placeholder='Load Details...' size='lg' onChange={e => setLoadInfo(e.target.value)} value={loadInfo}/>
+            {/* <textarea type="text" onChange={e => setLoadInfo(e.target.value)} value={loadInfo} placeholder='About Load...' className='w-full p-2 border border-black  focus:shadow-lg outline-0' style={{ borderRadius: "5px" }}  ></textarea> */}
           </div>
           <div>
             <button type='submit' className='w-full text-xl bg-green-400 px-3 py-2 mt-3 rounded-lg'  >Submit</button>

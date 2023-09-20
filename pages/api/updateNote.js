@@ -21,7 +21,7 @@ async function handler(req, res) {
     }
     try {
         const updateNote = await Note.findByIdAndUpdate(id, { name, fromCity, toCity, date, loadInfo });
-        console.log(updateNote);
+        // console.log(updateNote);
         res.status(200).json(updateNote)
     } catch (error) {
         console.log(error);

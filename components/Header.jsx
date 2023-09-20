@@ -1,15 +1,18 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import style from '../styles/Header.module.css'
-import { Box, Image } from "@chakra-ui/react";
+import {  Image } from "@chakra-ui/react";
 import { CgProfile } from 'react-icons/cg';
-import ProfileDiv from "./profileDiv";
+// import { useRouter } from "next/router";
+import LinkHeading from '../components/headerHeading'
+
 
 const Header = () => {
 
     const { data: session } = useSession()
+    // const router = useRouter();
 
     return (
         <div className={style.main}>
@@ -27,9 +30,11 @@ const Header = () => {
                 <Link href='/dashboard' className={style.link}>
                     DASHBOARD
                 </Link>
-                {/* <Link href='loadPost' className={style.link}>
-                    ADD LOAD
-                </Link> */}
+                {/* <DashboardHeading /> */}
+                {/* <a href={`${session?router.push('/admindashboard'):router.push('/admin')}`} className={style.link}>
+                    ADMIN
+                </a> */}
+                {/* <LinkHeading />  */}
                 <Link href='#' className={style.link}>
                     CONTACT
                 </Link>
@@ -45,9 +50,6 @@ const Header = () => {
                                 <CgProfile className={style.profileIcon} onClick={() => signOut({ callbackUrl: "/" })}/>
                                 <span >Profile</span>
                             </div>
-                            {/* <div style={{marginTop:"500px"}}>
-                                            <ProfileDiv />
-                                        </div> */}
                         </div>
                         :
                         // <button

@@ -14,7 +14,7 @@ async function handler(req, res) {
         }).then(() => console.log("DB connected"));
         let newNote = new Note({ name, fromCity, toCity, date, loadInfo });
         await newNote.save();
-        console.log(newNote);
+        // console.log(newNote);
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: "internal error"});

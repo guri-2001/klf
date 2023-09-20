@@ -1,29 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import clientPromise from "../lib/mongo";
 import { useSession } from "next-auth/react";
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRange } from 'react-date-range';
-import {
-    Table,
-    Thead,
-    Tbody,
-    Tr,
-    Th,
-    Td,
-    TableContainer,
-    Button,
-    Input,
-    Select,
-} from '@chakra-ui/react'
+import { Input } from '@chakra-ui/react'
 import { useRouter } from "next/navigation";
-import axios from "axios";
-import { MdDelete } from 'react-icons/md';
-import { FiEdit } from 'react-icons/fi';
 import Link from "next/link";
 
 
-const Alldata = ({ movies, alldata }) => {
+const Alldata = ({ movies }) => {
 
     const { data: session } = useSession();
 
@@ -37,131 +23,10 @@ const Alldata = ({ movies, alldata }) => {
     const [firstDate, setFirstDate] = useState("")
     const [secondDate, setSecondDate] = useState("")
 
-    const [visibility, setVisibility] = useState(false);
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [noteId, setNoteId] = useState('');
-
-    // ------------- Delete Load Start ----------------->
-
-    // const handleDeletePost = async (postId) => {
-    //     try {
-    //         let response = await fetch('https://klf.vercel.app/api/deletePost?id=' + postId, {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Accept': 'application/json, text/plain, */*',
-    //                 'Content-Type': 'application/json'
-    //             }
-    //         });
-    //         response = await response.json();
-    //         window.location.reload();
-    //     } catch (error) {
-    //         console.log('An error occurred while deleting ', error);
-    //     }
-    // }
-
-    // ------------- Delete Load End ----------------->
-
-    // -----------------Delete User Start ------------------->
-
-    const deleteNote = async (noteId) => {
-        axios.delete(`/api/deleteUser?id=${noteId}`).then(() => {
-            router.refresh()
-        })
-    }
-
-    // ------------- Delete User End ----------------->
-
-    // ------------- Update User start ----------------->
-
-    const editForm = (name, email, noteId) => {
-        setVisibility(visibility => !visibility)
-        setName(name)
-        setEmail(email)
-        setNoteId(noteId)
-    }
-
-    const updateNote = async (noteId) => {
-        const noteObj = {
-            name: name,
-            email: email,
-        }
-        // console.log(noteObj);
-        await axios.put(`/api/updateUser?id=${noteId}`, noteObj)
-            .then(() => {
-                router.refresh();
-            })
-    }
-
-
-
-
-    // ------------- Update User End ----------------->
-
     //<---------------- Admin Part Start ------------------->
 
     if (session?.user?.role === "admin") {
-        return (
-            <>
-                <div style={{ height: "100vh", backgroundColor: "rgb(241 245 249)" }} className="w-full">
-                    <h1>Welcome {session?.user?.name} </h1>
-                    <div className="mt-4">
-                        <Link href={"loadPost"} className="bg-cyan-400 px-3 py-2 ml-5">Add Load</Link>
-                        <Link href={"allloads"} className="bg-cyan-400 px-3 py-2 ml-5">All loads</Link>
-                    </div>
-                    <h1 align="center" style={{ marginBottom: "100px" }}>All Users </h1>
-                    <TableContainer mx={300} >
-                        <Table variant='simple'>
-                            <Thead>
-                                <Tr>
-                                    <Th>Name</Th>
-                                    <Th>Email</Th>
-                                    <Th>Role</Th>
-                                    <Th>Verify</Th>
-                                </Tr>
-                            </Thead>
-                            {alldata.map((user) => (
-                                <>
-                                    <Tbody key={user._id}>
-                                        <Tr>
-                                            <Td>{user.name}</Td>
-                                            <Td>{user.email}</Td>
-                                            <Td>{user.role}</Td>
-                                            <Td>
-                                                <div className='flex gap-4 items-start'>
-
-                                                    <button onClick={(name, email, password, noteId) => editForm(user.name, user.email, user._id)} className='hover:text-green-600 text-2xl' title='Edit' ><FiEdit /></   button>
-                                                    <button onClick={() => deleteNote(user._id)} className='hover:text-rose-600 text-2xl' title='Delete'><MdDelete /></button>
-                                                </div>
-                                            </Td>
-                                        </Tr>
-                                    </Tbody>
-                                </>
-                            ))}
-                        </Table>
-                    </TableContainer>
-                    {
-                        visibility && <div>
-                            <h1 className='text-3xl text-center mb-5'>Update Notes</h1>
-                            <div className='w-1/2 m-auto bg-gray-700		p-4 text-white rounded-lg'>
-                                <div>
-                                    <label>Name</label>
-                                    <input type='text' placeholder='Title' id='name' value={name} onChange={(e) => setName(e.target.value)} className='w-full p-2 text-black' />
-                                </div>
-                                <div>
-                                    <label>Email</label>
-                                    <textarea onChange={(e) => setEmail(e.target.value)} type='text' placeholder='Content' id='email' value={email} className='w-full p-2 text-black'></textarea>
-                                </div>
-                                <div className='flex gap-3 mt-4 '>
-                                    <button type='submit' onClick={() => updateNote(noteId)} className='bg-green-500 p-1 px-3 rounded-lg text-black'>Update</button>
-                                    <button onClick={() => setVisibility(visibility => !visibility)} className='bg-rose-500 p-1 px-3 rounded-lg text-black'>Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div>
-            </>
-        );
+        return router.push('/admindashboard')
 
         //<---------------- Admin Part End ------------------->
 
@@ -207,7 +72,7 @@ const Alldata = ({ movies, alldata }) => {
         return (
             <div style={{ display: "grid", gridTemplateColumns: "35% 65%", padding: "10px 30px", height: "100vh", backgroundColor: "rgb(241 245 249)" }} >
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                    <h1> Welcome <span style={{ textDecoration: "underline" }}>{session?.user?.name}</span> </h1>
+                    {/* <h1> Welcome <span style={{ textDecoration: "underline" }}>{session?.user?.name}</span> </h1> */}
 
                     {/* <----------------Filter Area start----------------> */}
 
@@ -215,7 +80,6 @@ const Alldata = ({ movies, alldata }) => {
                         <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                             <div >
                                 <label>From </label>
-                                {/* <input type="text" onClick={() => setShow(!show)} style={{ height: "40px" }} value={firstDate} onChange={() => { setFirstDate(firstDatevalue) }} /> */}
                                 <Input
                                     value={firstDate}
                                     onChange={() => { setFirstDate(firstDatevalue) }}
@@ -226,7 +90,6 @@ const Alldata = ({ movies, alldata }) => {
                             </div>
                             <div>
                                 <label>To</label>
-                                {/* <input type="text" onClick={() => setShow(!show)} style={{ height: "40px" }} value={secondDate} onChange={() => { setSecondDate(secondDatevalue) }} /> */}
                                 <Input
                                     value={secondDate}
                                     onChange={() => { setSecondDate(secondDatevalue) }}
@@ -297,14 +160,8 @@ export async function getServerSideProps() {
             .sort({ _id: -1 })
             .toArray();
 
-        const alldata = await db
-            .collection("users")
-            .find({})
-            .sort({ role: 1 })
-            .toArray();
-
         return {
-            props: { movies: JSON.parse(JSON.stringify(movies)), alldata: JSON.parse(JSON.stringify(alldata)) },
+            props: { movies: JSON.parse(JSON.stringify(movies)) },
         };
     } catch (e) {
         console.error(e);
