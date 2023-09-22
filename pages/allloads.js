@@ -6,23 +6,23 @@ import { FiEdit } from 'react-icons/fi';
 import Link from 'next/link';
 
 
-export async function getStaticProps() {
-    const mongoose = require('mongoose');
-    const Note = require('../models/Note');
+// export async function getStaticProps() {
+//     const mongoose = require('mongoose');
+//     const Note = require('../models/Note');
 
-    await mongoose.connect(process.env.MONGODB_URI, {
-        useNewUrlParser: true,
-    }).then(() => { console.log("DB connected") });
+//     await mongoose.connect(process.env.MONGODB_URI, {
+//         useNewUrlParser: true,
+//     }).then(() => { console.log("DB connected") });
 
-    const notes = await Note.find();
-    console.log(notes);
+//     const notes = await Note.find();
+//     console.log(notes);
 
-    return {
-        props: {
-            notes: JSON.parse(JSON.stringify(notes))
-        }
-    }
-}
+//     return {
+//         props: {
+//             notes: JSON.parse(JSON.stringify(notes))
+//         }
+//     }
+// }
 
 export default function Home({ notes }) {
 
@@ -132,4 +132,25 @@ export default function Home({ notes }) {
             </div>
         </>
     )
+}
+
+
+
+export async function getServerSideProps() {
+    try {
+        const client = await clientPromise;
+        const db = client.db("facebook");
+
+        const notes = await db
+            .collection("notes")
+            .find({})
+            .sort({ _id: -1 })
+            .toArray();
+
+        return {
+            props: { notes: JSON.parse(JSON.stringify(notes)) },
+        };
+    } catch (e) {
+        console.error(e);
+    }
 }
