@@ -16,10 +16,11 @@ import { FiEdit } from 'react-icons/fi';
 // import { useSession } from 'next-auth/react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 const AdminDashboard = ({ alldata }) => {
 
-    // const { data: session } = useSession()
+    const { data: session } = useSession()
     const router = useRouter()
 
     const [visibility, setVisibility] = useState(false);
