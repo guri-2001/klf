@@ -138,7 +138,7 @@ export async function getServerSideProps() {
         const alldata = await db
             .collection("users")
             .find({})
-            .sort({ role: 1 })
+            // .sort({ role: 1 })
             .toArray();
 
         return {
