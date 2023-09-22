@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { MdDelete } from 'react-icons/md';
 import { FiEdit } from 'react-icons/fi';
 import Link from 'next/link';
+import clientPromise from '../lib/mongo';
 
 
 // export async function getStaticProps() {
