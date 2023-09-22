@@ -135,19 +135,19 @@ const RegisterForm = () => {
                                 onChange={e => setCPassword(e.target.value)}
                             />
                         </div>
-                        {/* <select variant='flushed' placeholder='Select' onChange={e => setRole(e.target.value)} value={role}>
-                            <option value=''>Select</option>
+                        <Select variant='flushed' placeholder='Select' onChange={e => setRole(e.target.value)} value={role}>
+                            {/* <option value=''>Select</option> */}
                             <option value='admin'>Admin</option>
                             <option value='user'>User</option>
-                        </select> */}
-                        <input
+                        </Select>
+                        {/* <input
                                 type="text"
                                 className="form-control"
                                 id="confirm-password"
                                 placeholder="Confirm password"
                                 value={role}
                                 onChange={e => setRole(e.target.value)}
-                            />
+                            /> */}
                         {
                             error &&
                             <div>

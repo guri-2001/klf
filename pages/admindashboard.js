@@ -65,7 +65,7 @@ const AdminDashboard = ({ alldata }) => {
     return (
         <>
             <div style={{ height: "100vh", backgroundColor: "rgb(241 245 249)" }} className="w-full">
-                {/* <h1>Welcome {session?.user?.name} </h1> */}
+                <h1>Welcome {session?.user?.name} </h1>
                 <div >
                 </div>
                 <h1 align="center" style={{ marginBottom: "100px" ,marginBottom:"10px" }}>All Users </h1>
@@ -139,8 +139,6 @@ export async function getServerSideProps() {
             .find({})
             .sort({ role: 1 })
             .toArray();
-
-        console.log(alldata);
 
         return {
             props: { alldata: JSON.parse(JSON.stringify(alldata)) },

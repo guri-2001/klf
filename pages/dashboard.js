@@ -72,7 +72,7 @@ const Alldata = ({ movies }) => {
         return (
             <div style={{ display: "grid", gridTemplateColumns: "35% 65%", padding: "10px 30px", height: "100vh", backgroundColor: "rgb(241 245 249)" }} >
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                    {/* <h1> Welcome <span style={{ textDecoration: "underline" }}>{session?.user?.name}</span> </h1> */}
+                    <h1> Welcome <span style={{ textDecoration: "underline" }}>{session?.user?.name}</span> </h1>
 
                     {/* <----------------Filter Area start----------------> */}
 
